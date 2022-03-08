@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,11 @@ public final class AnalyzeNetwork {
     }
 
     /**
+     * Given an input file path (absolute to where the application is running)
+     * that is an arbitrary text file that contains a list of commands to
+     * analyze the Herbie network. The result is a list of alphabetically sorted
+     * companies that each have the strongest partner relationship or no
+     * relationship at all.
      *
      * @param args
      */
@@ -113,19 +119,22 @@ public final class AnalyzeNetwork {
                 }
             }
 
-            for (Map.Entry<String, Company> companyElement : listOfCompanies
-                    .entrySet()) {
-                String[] maxConnection = companyElement.getValue()
+            //alphabetically sort the list
+            String[] sortedCompanyList = sortAlphabetically(listOfCompanies);
+
+            //print it out to the screen
+            for (int i = 0; i < sortedCompanyList.length; i++) {
+                Company company = listOfCompanies.get(sortedCompanyList[i]);
+                String[] maxConnection = company
                         .getMaxPartnerConnectionStrength();
 
-                System.out.print(companyElement.getKey() + ": ");
+                System.out.print(sortedCompanyList[i] + ": ");
                 if (maxConnection != null) {
                     System.out.println(
                             maxConnection[0] + " (" + maxConnection[1] + ")");
                 } else {
                     System.out.println("No Current Relationship");
                 }
-
             }
 
             inputFile.close();
@@ -134,5 +143,27 @@ public final class AnalyzeNetwork {
         }
 
         cmdLineInput.close();
+    }
+
+    /**
+     * Alphabetically sort the map of companies.
+     *
+     * @param unsortedMapOfCompanies
+     * @return a sorted array of companies.
+     */
+    public static String[] sortAlphabetically(
+            Map<String, Company> unsortedMapOfCompanies) {
+        String[] sortedCompanyList = new String[unsortedMapOfCompanies.size()];
+        int i = 0;
+
+        for (Map.Entry<String, Company> company : unsortedMapOfCompanies
+                .entrySet()) {
+            sortedCompanyList[i] = company.getKey();
+            i += 1;
+        }
+
+        Arrays.sort(sortedCompanyList);
+
+        return sortedCompanyList;
     }
 }

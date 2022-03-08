@@ -1,7 +1,7 @@
 Partner Chris
 Partner Mark
-Company ACME
 Company Globex
+Company ACME
 Employee TJ Globex
 Company Hooli
 Employee Nick Hooli
