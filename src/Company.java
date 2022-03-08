@@ -25,9 +25,21 @@ public class Company {
     private Map<String, Queue<String>> partnerInteractions;
 
     /**
+     * Strongest Connections Size.
+     */
+    private int strongestConnection;
+
+    /**
+     * Name of the Partner with the strongest connection.
+     */
+    private String strongestPartner;
+
+    /**
      * Default No-Argument Constructor.
      */
     public Company() {
+        this.strongestConnection = 0;
+        this.strongestPartner = "";
         this.employees = new ArrayList<String>();
         this.partnerInteractions = new HashMap<>();
     }
@@ -64,16 +76,22 @@ public class Company {
      */
     public void addPartnerConnection(String partnerName, String employeeName,
             String contactType) {
+        Queue<String> employee;
         if (this.partnerInteractions.containsKey(partnerName)) {
-            Queue<String> employee = this.partnerInteractions.get(partnerName);
+            employee = this.partnerInteractions.get(partnerName);
             employee.add(employeeName);
             employee.add(contactType);
         } else {
-            Queue<String> employee = new LinkedList<>();
+            employee = new LinkedList<>();
             employee.add(employeeName);
             employee.add(contactType);
 
             this.partnerInteractions.put(partnerName, employee);
+        }
+
+        if (employee.size() / 2 > this.strongestConnection) {
+            this.strongestPartner = partnerName;
+            this.strongestConnection = employee.size() / 2;
         }
     }
 
@@ -87,27 +105,31 @@ public class Company {
         //Declare a new String two-tuple in the form of an array
         String[] partnerConnection = new String[2];
 
-        //the minimum partner connection to a company is 0
-        int max = 0;
-        boolean found = false;
-
-        //go through partnerInteractions map to find maxConnection
-        for (Map.Entry<String, Queue<String>> partner : this.partnerInteractions
-                .entrySet()) {
-            //an employee has a contact type so divide by 2 for connection
-            int currentValue = partner.getValue().size() / 2;
-
-            if (currentValue > max) {
-                found = true;
-                max = currentValue;
-                partnerConnection[0] = partner.getKey();
-                partnerConnection[1] = Integer.toString(currentValue);
-            }
-        }
-
-        if (!found) {
+        if (this.strongestPartner.equals("")) {
             partnerConnection = null;
+        } else {
+            partnerConnection[0] = this.strongestPartner;
+            partnerConnection[1] = Integer.toString(this.strongestConnection);
         }
+
+        /*
+         * //the minimum partner connection to a company is 0 int max = 0;
+         * boolean found = false;
+         *
+         * //go through partnerInteractions map to find maxConnection for
+         * (Map.Entry<String, Queue<String>> partner : this.partnerInteractions
+         * .entrySet()) { //an employee has a contact type so divide by 2 for
+         * connection
+         *
+         * int currentValue = partner.getValue().size() / 2;
+         *
+         * if (currentValue > max) { found = true; max = currentValue;
+         * partnerConnection[0] = partner.getKey(); partnerConnection[1] =
+         * Integer.toString(currentValue); } }
+         *
+         * if (!found) { partnerConnection = null; }
+         *
+         */
 
         return partnerConnection;
 
