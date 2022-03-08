@@ -6,16 +6,13 @@ import java.util.Map;
 import java.util.Queue;
 
 /**
- * Company class.
+ * Company class keeps track of the employees and the partnerInteractions.
  *
  * @author Pranav Chati
  *
  */
 public class Company {
-    /**
-     * Company Name.
-     */
-    private String companyName;
+    // private String companyName;
 
     /**
      * List of Employees.
@@ -31,19 +28,6 @@ public class Company {
      * Default No-Argument Constructor.
      */
     public Company() {
-        this.companyName = "";
-        this.employees = new ArrayList<String>();
-        this.partnerInteractions = new HashMap<>();
-    }
-
-    /**
-     * Argument Constructor.
-     *
-     * @param cName
-     *            name of the company being created
-     */
-    public Company(String cName) {
-        this.companyName = cName;
         this.employees = new ArrayList<String>();
         this.partnerInteractions = new HashMap<>();
     }

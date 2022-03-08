@@ -8,11 +8,20 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
+ * The Drive Capital Online Coding Interview response.
  *
  * @author Pranav Chati
  *
  */
-public final class CodingInterview {
+public final class AnalyzeNetwork {
+
+    /**
+     * Private constructor so this utility class cannot be instantiated.
+     */
+    private AnalyzeNetwork() {
+
+    }
+
     /**
      *
      * @param args
@@ -60,8 +69,7 @@ public final class CodingInterview {
                         companyName = line.substring(lengthOfCommand);
 
                         //create a new company name and add it to the company
-                        listOfCompanies.put(companyName,
-                                new Company(companyName));
+                        listOfCompanies.put(companyName, new Company());
                         break;
 
                     case "EMPLOYEE":
@@ -85,14 +93,14 @@ public final class CodingInterview {
                     case "CONTACT":
                         employeeName = fileCommands[1];
                         partnerName = fileCommands[2];
-                        contactType = fileCommands[3];
+                        contactType = fileCommands[fileCommands.length - 1];
 
-                        if (listOfEmployees.containsKey(employeeName)) {
+                        if (listOfEmployees.containsKey(employeeName)
+                                && listOfPartners.contains(partnerName)) {
                             company = listOfCompanies
                                     .get(listOfEmployees.get(employeeName));
 
                             if (company != null) {
-                                //System.out.println("CONTACT - Company Exists");
                                 company.addPartnerConnection(partnerName,
                                         employeeName, contactType);
                             }
