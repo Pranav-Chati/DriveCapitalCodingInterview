@@ -14,10 +14,9 @@ public final class CodingInterview {
         Scanner cmdLineInput = new Scanner(System.in);
 
         //declare variables for holding Partner and Company information
-        //Set<String> partners = new Set<>();
         List<String> listOfPartners = new ArrayList<>();
-        Map<String, Company> companies = new HashMap<>();
-        Map<String, String> employees = new HashMap<>();
+        Map<String, Company> listOfCompanies = new HashMap<>();
+        Map<String, String> listOfEmployees = new HashMap<>();
 
         System.out.println("Enter Input File: ");
         String inputFileName = cmdLineInput.nextLine();
@@ -39,6 +38,8 @@ public final class CodingInterview {
                 String partnerName;
                 String companyName;
                 String employeeName;
+                String contactType;
+                Company company;
 
                 //length of the command and its space after
                 int lengthOfCommand = fileCommands[0].length() + 1;
@@ -54,7 +55,8 @@ public final class CodingInterview {
                         companyName = line.substring(lengthOfCommand);
 
                         //create a new company name and add it to the company
-                        companies.put(companyName, new Company(companyName));
+                        listOfCompanies.put(companyName,
+                                new Company(companyName));
                         break;
 
                     case "EMPLOYEE":
@@ -62,10 +64,10 @@ public final class CodingInterview {
                         employeeName = fileCommands[1];
                         lengthOfCommand += employeeName.length() + 1;
                         companyName = line.substring(lengthOfCommand);
-                        employees.put(employeeName, companyName);
+                        listOfEmployees.put(employeeName, companyName);
 
                         //add employee to company
-                        Company company = companies.get(companyName);
+                        company = listOfCompanies.get(companyName);
 
                         //check for null dereference pointer
                         if (company != null) {
@@ -74,6 +76,17 @@ public final class CodingInterview {
                         break;
 
                     case "CONTACT":
+                        employeeName = fileCommands[1];
+                        partnerName = fileCommands[2];
+                        contactType = fileCommands[3];
+
+                        if (listOfEmployees.containsKey(employeeName)) {
+                            company = listOfCompanies
+                                    .get(listOfEmployees.get(employeeName));
+
+                            company.addPartnerConnection(partnerName,
+                                    employeeName, contactType);
+                        }
 
                         break;
 
