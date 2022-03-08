@@ -1,5 +1,5 @@
-#Drive Capital Coding Interview
-##Testing My Submission
+# Drive Capital Coding Interview
+## Testing My Submission
 In order to test my submission, you would need to first download the repository onto their computer. There are two ways to do this:
 1) Clone the repository by getting the HTTPS link of the github
 2) Downloading a zip file of the program and then extract contents in your desired folder
@@ -9,24 +9,33 @@ run the program by inputting the file to be analyzed. The file that needs to be 
 
 There are a few test files to test various solutions, but please feel free to create another test case of your choice. Please read below to show certain assumptions of the code.
 
-##Approaching the Problem
+## Approaching the Problem
+I thought of using a public class that contains information about the employees the company has, the partner relationships with certain employees, and 
 
-Instructions on how to build, run, and test your submission
-A brief explanation of how you approached the problem and any design decisions made
+
 Any assumptions your code makes about the input data or any possible edge cases you may discover
 If an instruction is unclear, please reach out or document in the README your interpretation of the discrepancy
 
+## Assumptions
+1) The employee and partner names are each one word which consis of the upper and lowercase characters A thru z. i.e. "James" is one word
+2) Company names can be any size of words. i.e. the company "Urban Outfitters", "Kentucky Fried Chicken", "ACME" are all possibilities
+3) The declarations are done before. i.e. an individual can't type "Contact Molly Chris coffee" if Molly or Chris has not been declared as an employee or partner, respectively
 
-##More in depth approach
+Some possible flaws:
+1) My solution does not save the name of a company in the Company object but uses the map to figure out the name
+
+## Clearing up any confusions
+In the sample text, the partner labeled was mark, but at the bottom it was Molly. I believe Molly and Mark are suppose to be the same people, if not, Molly was not properly declared as a partner.
+
+
+## More in depth approach
 Initially when taking a look at the problem, the first two issues came into mind
 1 - how to segment the file really easily
 2 - how to keep track of interactions between all of the people
 
 I initially thought of creating two public classes, a partner class and a company class.
-
-	The company class would have a private string company name variable, a private sequence of strings that contains all of the employees associated with the company.
-
-	The partner class would just have a String as a name and an occurrences
+- The company class would have a private string company name variable, a private sequence of strings that contains all of the employees associated with the company.
+- The partner class would just have a String as a name and an occurrences
 
 After further investigation, I realized the partner class isn’t really a feasible option since counting the occurrences in a partner class would just count an overall number of companies they are linked too rather than the individual companies. I switched over to a map in the company class that has a string datatype as a key with the PartnerName and then an integer with the number of occurrences. An issue that may arise is handling if a partner has multiple contacts, but an if statement would need to be created for that. Another issue that needs to be addressed is, having just the partnername and their occurrences would hide the link to the company especially if that information wants to be found again.
 
