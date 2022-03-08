@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -13,6 +15,7 @@ public final class CodingInterview {
 
         //declare variables for holding Partner and Company information
         //Set<String> partners = new Set<>();
+        List<String> listOfPartners = new ArrayList<>();
         Map<String, Company> companies = new HashMap<>();
         Map<String, String> employees = new HashMap<>();
 
@@ -31,29 +34,35 @@ public final class CodingInterview {
             String line;
             while ((line = inputFile.readLine()) != null) {
                 String[] fileCommands = line.split(" ");
+
+                //declare variables
+                String partnerName;
+                String companyName;
+                String employeeName;
+
                 //length of the command and its space after
                 int lengthOfCommand = fileCommands[0].length() + 1;
 
                 switch (fileCommands[0].toUpperCase()) {
                     case "PARTNER":
-                        String partnerName = line.substring(lengthOfCommand);
-
-                        //insert partnerName into partners set?
+                        partnerName = line.substring(lengthOfCommand);
+                        listOfPartners.add(partnerName);
                         break;
 
                     case "COMPANY":
                         //accounts if the company name is greater than 1 word
-                        String companyName = line.substring(lengthOfCommand);
+                        companyName = line.substring(lengthOfCommand);
 
                         //create a new company name and add it to the company
                         companies.put(companyName, new Company(companyName));
                         break;
 
                     case "EMPLOYEE":
-                        //find employeeName and companyName
-                        String employeeName = fileCommands[1];
+                        //declare employeeName and companyName
+                        employeeName = fileCommands[1];
                         lengthOfCommand += employeeName.length() + 1;
                         companyName = line.substring(lengthOfCommand);
+                        employees.put(employeeName, companyName);
 
                         //add employee to company
                         Company company = companies.get(companyName);
@@ -65,7 +74,7 @@ public final class CodingInterview {
                         break;
 
                     case "CONTACT":
-                        //System.out.println("Contact");
+
                         break;
 
                     default:
