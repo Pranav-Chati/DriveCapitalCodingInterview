@@ -10,19 +10,24 @@ run the program by inputting the file to be analyzed. The file that needs to be 
 There are a few test files to test various solutions, but please feel free to create another test case of your choice. Please read below to show certain assumptions of the code.
 
 ## Approaching the Problem
-I thought of using a public class that contains information about the employees the company has, the partner relationships with certain employees, and 
+I thought of using a public class that contains information about the employees the company has and the partner relationships with certain employees. This allows to easily figure out which partner had the strongest relationship and which employees were in the company itself. I used an arraylist to keep track of all the partners names, a map of comapnies where the key was the company name(String) and the value be the associated company class(Company), and then a map of employees where the key was the employee name(String) and the value was the company name(String).
 
+I parsed through each line of the input text file, and then took the first word of each line to see what command was being ran. I made sure to uppercase all of the letters when testing the commands just in case a typo was made with the commands. Each switch case for the various commands have specific statements that run. Overall, there are quite a few while and for statements that get ran.
 
-Any assumptions your code makes about the input data or any possible edge cases you may discover
-If an instruction is unclear, please reach out or document in the README your interpretation of the discrepancy
+The  while loop to parse through the text file runs in O(n); however, my initial program ran in O(n^2) because the last for loop that outputs everything to the console runs a method that also runs a for loop. A solution to this that I implemenetd is to keep a variable that has the strongest partner relationship that gets adjusted when the contact command is called.
 
 ## Assumptions
 1) The employee and partner names are each one word which consis of the upper and lowercase characters A thru z. i.e. "James" is one word
 2) Company names can be any size of words. i.e. the company "Urban Outfitters", "Kentucky Fried Chicken", "ACME" are all possibilities
 3) The declarations are done before. i.e. an individual can't type "Contact Molly Chris coffee" if Molly or Chris has not been declared as an employee or partner, respectively
+4) Company names are globally unique
 
 Some possible flaws:
 1) My solution does not save the name of a company in the Company object but uses the map to figure out the name
+
+Possible Boundary Cases:
+- Entering a wrong command (i.e. "Software Engineer")
+- Entering an extra white space after each text
 
 ## Clearing up any confusions
 In the sample text, the partner labeled was mark, but at the bottom it was Molly. I believe Molly and Mark are suppose to be the same people, if not, Molly was not properly declared as a partner.
