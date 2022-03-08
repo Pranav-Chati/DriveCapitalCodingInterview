@@ -28,7 +28,7 @@ public class Company {
     private Map<String, Queue<String>> partnerInteractions;
 
     /**
-     * Default No-Args Constructor.
+     * Default No-Argument Constructor.
      */
     public Company() {
         this.companyName = "";
@@ -97,7 +97,7 @@ public class Company {
      * Finds the partner that has the greatest connection to the company and
      * returns the two-tuple of the name and the connection strength.
      *
-     * @return
+     * @return [the two-tuple that shows the partner connection]
      */
     public String[] getMaxPartnerConnectionStrength() {
         //Declare a new String two-tuple in the form of an array

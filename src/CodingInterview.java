@@ -7,8 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Pranav Chati
+ *
+ */
 public final class CodingInterview {
-
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //initialize variables for file scanning
         Scanner cmdLineInput = new Scanner(System.in);
@@ -21,16 +29,10 @@ public final class CodingInterview {
         System.out.println("Enter Input File: ");
         String inputFileName = cmdLineInput.nextLine();
 
-        //System.out.println("Enter Output File: ");
-        //String outputFileName = cmdLineInput.nextLine();
-
         try {
             //create a new file reader
             BufferedReader inputFile = new BufferedReader(
                     new FileReader(inputFileName));
-
-            //BufferedWriter outputFile = new BufferedWriter(
-            //      new FileWriter(outputFileName));
 
             //read file line by line
             String line;
