@@ -80,7 +80,7 @@ public class Company {
      */
     public void addPartnerConnection(String partnerName, String employeeName,
             String contactType) {
-        if (!this.partnerInteractions.containsKey(partnerName)) {
+        if (this.partnerInteractions.containsKey(partnerName)) {
             Queue<String> employee = this.partnerInteractions.get(partnerName);
             employee.add(employeeName);
             employee.add(contactType);
@@ -91,6 +91,42 @@ public class Company {
 
             this.partnerInteractions.put(partnerName, employee);
         }
+    }
+
+    /**
+     * Finds the partner that has the greatest connection to the company and
+     * returns the two-tuple of the name and the connection strength.
+     *
+     * @return
+     */
+    public String[] getMaxPartnerConnectionStrength() {
+        //Declare a new String two-tuple in the form of an array
+        String[] partnerConnection = new String[2];
+
+        //the minimum partner connection to a company is 0
+        int max = 0;
+        boolean found = false;
+
+        //go through partnerInteractions map to find maxConnection
+        for (Map.Entry<String, Queue<String>> partner : this.partnerInteractions
+                .entrySet()) {
+            //an employee has a contact type so divide by 2 for connection
+            int currentValue = partner.getValue().size() / 2;
+
+            if (currentValue > max) {
+                found = true;
+                max = currentValue;
+                partnerConnection[0] = partner.getKey();
+                partnerConnection[1] = Integer.toString(currentValue);
+            }
+        }
+
+        if (!found) {
+            partnerConnection = null;
+        }
+
+        return partnerConnection;
+
     }
 
 }

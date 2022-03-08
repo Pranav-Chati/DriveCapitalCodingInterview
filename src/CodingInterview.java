@@ -29,6 +29,9 @@ public final class CodingInterview {
             BufferedReader inputFile = new BufferedReader(
                     new FileReader(inputFileName));
 
+            //BufferedWriter outputFile = new BufferedWriter(
+            //      new FileWriter(outputFileName));
+
             //read file line by line
             String line;
             while ((line = inputFile.readLine()) != null) {
@@ -71,6 +74,8 @@ public final class CodingInterview {
 
                         //check for null dereference pointer
                         if (company != null) {
+                            //System.out.println("EMPLOYEE - Company Exists");
+
                             company.addEmployee(employeeName);
                         }
                         break;
@@ -84,16 +89,31 @@ public final class CodingInterview {
                             company = listOfCompanies
                                     .get(listOfEmployees.get(employeeName));
 
-                            company.addPartnerConnection(partnerName,
-                                    employeeName, contactType);
+                            if (company != null) {
+                                //System.out.println("CONTACT - Company Exists");
+                                company.addPartnerConnection(partnerName,
+                                        employeeName, contactType);
+                            }
                         }
-
                         break;
 
                     default:
                         System.out.println("This command does not exist.");
                         break;
+                }
+            }
 
+            for (Map.Entry<String, Company> companyElement : listOfCompanies
+                    .entrySet()) {
+                String[] maxConnection = companyElement.getValue()
+                        .getMaxPartnerConnectionStrength();
+
+                System.out.print(companyElement.getKey() + ": ");
+                if (maxConnection != null) {
+                    System.out.println(
+                            maxConnection[0] + " (" + maxConnection[1] + ")");
+                } else {
+                    System.out.println("No Current Relationship");
                 }
 
             }
