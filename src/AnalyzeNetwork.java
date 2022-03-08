@@ -90,8 +90,6 @@ public final class AnalyzeNetwork {
 
                         //check for null dereference pointer
                         if (company != null) {
-                            //System.out.println("EMPLOYEE - Company Exists");
-
                             company.addEmployee(employeeName);
                         }
                         break;
