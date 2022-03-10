@@ -14,7 +14,7 @@ I thought of using a public class that contains information about the employees 
 
 I parsed through each line of the input text file, and then took the first word of each line to see what command was being ran. I made sure to uppercase all of the letters when testing the commands just in case a typo was made with the commands. Each switch case for the various commands have specific statements that run. Overall, there are quite a few while and for statements that get ran.
 
-The  while loop to parse through the text file runs in O(n); however, my initial program ran in O(n^2) because the last for loop that outputs everything to the console runs a method that also runs a for loop. A solution to this that I implemenetd is to keep a variable that has the strongest partner relationship that gets adjusted when the contact command is called.
+The  while loop to parse through the text file runs in O(n). While using the .split method runs in O(n) time, that time can be amoritzed to be O(1) since the length of the line will always be four to five words (assuming the company does not have a ridiculously large name). However, my initial program ran in O(n^2) because the last for loop that outputs everything to the console runs a method that also runs a for loop. A solution to this that I implemenetd is to keep a variable that has the strongest partner relationship that gets adjusted when the contact command is called.
 
 ## Assumptions
 1) The employee and partner names are each one word which consis of the upper and lowercase characters A thru z. i.e. "James" is one word
