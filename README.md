@@ -50,10 +50,10 @@ Another issue that needs to be addressed if I have just a Map with a PartnerName
 
 
 Another problem that was run into was how to properly write the code for the employee command. There are three cases:
-- The best case is that the <employeeName> and <companyName> are both one word
-- The middle case is that one of the types (<employeeName> or <companyName>) are one word
-- The worst case is that the <employeeName> and <companyName> are both an infinite number of words.
+- The best case is that the employeeName and companyName are both one word
+- The middle case is that one of the types (employeeName or companyName) are one word
+- The worst case is that the employeeName and companyName are both an infinite number of words.
 
-For this scope of the problem, I am assuming that the <employeeName>  and the <partnerName> will be one word and that the <companyName> can be as many words. This means that the <companyName> can be 1 or more words. One word means like "James" or "Mark." Two words means like "James McArthur."
+For this scope of the problem, I am assuming that the employeeName  and the partnerName will be one word and that the companyName can be as many words. This means that the companyName can be 1 or more words. One word means like "James" or "Mark." Two words means like "James McArthur."
 
 The hardest functionality to figure out was how to create an interaction between the Partner and the company. When I initially had a partner class, I thought of having a number of occurrences, but that may have been really difficult and bad practice. I shouldn't two classes that depend on each other since if one class breaks, then the other can respond in an infinite number of ways. I decided the best option would be to maintain a list of partners that are connected with the company in the company class itself. I did this with a map that uses a string datatype as the key but a Queue<String> as the value. The Queue<String> will contain information about the employee and the mode of contact the specific partner has with the company. A problem that arose from this was, how do you tell if an employee is from a certain company in the main method? Since it is given that the employee names are globally unique, I created a map of String Keys and Pairs in the main method where the Key was the EmployeeName and the Pair was the company Name. What this allows me to do is when given an EmployeeName, I can find the companyName by getting the value of the key. After getting the company name, I can then use the Map<String, Company> and find the Company class associated with the speific company name. From there, I manipulate the Map associated with Partner and Company interactions.
