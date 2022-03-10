@@ -9,6 +9,15 @@ run the program by inputting the file to be analyzed. The file that needs to be 
 
 There are a few test files to test various solutions, but please feel free to create another test case of your choice. Please read below to show certain assumptions of the code.
 
+### Example of Testing It
+Enter Input File: 
+data/input.txt
+ACME: No Current Relationship
+Globex: Chris (2)
+Hooli: Mark (1)
+
+I entered the input text from the data file and was given the companies and their strongest relationships.
+
 ## Approaching the Problem
 I thought of using a public class that contains information about the employees the company has and the partner relationships with certain employees. This allows to easily figure out which partner had the strongest relationship and which employees were in the company itself. I used an arraylist to keep track of all the partners names, a map of comapnies where the key was the company name(String) and the value be the associated company class(Company), and then a map of employees where the key was the employee name(String) and the value was the company name(String).
 
